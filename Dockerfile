@@ -2,12 +2,11 @@
 
 FROM python:3.8
 
-WORKDIR /app
-
+RUN python3 -m venv /opt/venv
 COPY requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
+RUN /opt/venv/bin/pip install -r requirements.txt
 
-COPY . .
+COPY app.py app.py
 
 EXPOSE 5000
-CMD [ "python", "app.py"]
+ENTRYPOINT ["/opt/venv/bin/python", "app.py"]
